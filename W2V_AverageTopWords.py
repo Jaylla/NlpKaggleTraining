@@ -1,8 +1,8 @@
 import gensim
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+from sklearn.linear_model import LinearRegression
 from TextPreparing import review_to_words, review_to_wordlist
 from sklearn.feature_selection import chi2
 from sklearn.feature_selection import SelectKBest
@@ -120,17 +120,16 @@ testDataVecs = get_avg_feature_vecs(test_reviews, model, features_count)
 
 
 # ************* Make a prediction ******************************
-# Fit a random forest to the training data, using 100 trees
 
-forest = RandomForestClassifier(n_estimators=100)
+model = LinearRegression()
 
 print("Fitting a random forest to labeled training data...")
-forest = forest.fit(trainDataVecs, train["sentiment"])
+model = model.fit(trainDataVecs, train["sentiment"])
 
 # Test & extract results
-result = forest.predict(testDataVecs)
+result = model.predict(testDataVecs)
 
 # Write the test results
 output = pd.DataFrame(data={"id": test["id"], "sentiment": result})
-output.to_csv("F:\Data Mining\word2vec-nlp-tutorial\Data\W2V_AvgVectors_Top500_chi2_tfidf.csv",
+output.to_csv("F:\Data Mining\word2vec-nlp-tutorial\Data\W2V_AvgVectors_Top500_chi2_LinearRegression.csv",
               index=False, quoting=3)
