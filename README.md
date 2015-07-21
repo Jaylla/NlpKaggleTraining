@@ -4,4 +4,6 @@ Files BagOfWords.py and Word2Vec_AverageVectors.py contain code from tutorial wi
 
 ### The model description
 The first step is to select the most significant words, using sklearn.feature_selection.SelectKBest metod (chi-squared test).
-The second step is to count average vectors from Word2Vec representation of paragraph words (only words from first step are taken into account)
+The second step is to count average vectors from Word2Vec representation of paragraph words (only words from first step are taken into account).
+And finally model is trained using Linear Regression. 
+Final score is 0.93
